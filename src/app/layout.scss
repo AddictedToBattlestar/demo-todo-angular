@@ -1,0 +1,45 @@
+@media only screen and (min-width: 900px) {
+  div.layout-container {
+    grid-template-columns: 100px 30% auto;
+    grid-template-areas:
+        "header    header   header"
+        "new-todo  search   content"
+        "sidebar   sidebar  content";
+  }
+}
+
+@media only screen and (max-width: 899px) {
+  div.layout-container {
+    grid-template-columns: 100px auto;
+    grid-template-areas:
+        "header    header"
+        "new-todo  search"
+        "sidebar   sidebar";
+
+    section.body-content {
+      display: none;
+    }
+  }
+}
+
+.layout-container {
+  margin: 2em;
+  display: grid;
+  grid-gap: 0.5em;
+
+  header {
+    grid-area: header;
+  }
+  div.new-todo {
+    grid-area: new-todo;
+  }
+  div.search {
+    grid-area: search;
+  }
+  aside {
+    grid-area: sidebar;
+  }
+  section.body-content {
+    grid-area: content;
+  }
+}
