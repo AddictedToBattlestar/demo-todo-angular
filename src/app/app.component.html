@@ -2,9 +2,16 @@
   <header class="box">HEADER</header>
   <div class="new-todo box">NEW</div>
   <div class="search box">SEARCH</div>
-  <aside class="box">ASIDE</aside>
+  <aside class="box">
+    <div>ASIDE</div>
+    <ul>
+      <li *ngFor="let todo of todos">
+        <a href="{{todo.id}}">{{todo.title}}</a>
+      </li>
+    </ul>
+  </aside>
   <section class="body-content box">
-    BODY CONTENT
+    <div>BODY CONTENT</div>
     <router-outlet></router-outlet>
   </section>
 </div>
