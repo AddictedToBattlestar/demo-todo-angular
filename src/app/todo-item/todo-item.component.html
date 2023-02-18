@@ -1,2 +1,7 @@
 <p>todo-item works!</p>
 <div>ID: {{id}}</div>
+<div *ngIf="todo">
+  <div >title: {{todo.title}}</div>
+  <div>description: {{todo.description}}</div>
+</div>
+

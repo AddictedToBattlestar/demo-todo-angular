@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { TodoListingComponent } from './todo-listing/todo-listing.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
