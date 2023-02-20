@@ -7,13 +7,15 @@ import { TodoListingComponent } from './todo-listing/todo-listing.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import {HttpClientModule} from "@angular/common/http";
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoListingComponent,
     PageNotFoundComponent,
-    TodoItemComponent
+    TodoItemComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+@import "src/styles/colors";
+
+ul {
+  list-style-type: none;
+  color: yellow;
+  a {
+    text-decoration: none;
+    color: $font-color;
+  }
+}

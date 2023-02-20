@@ -4,11 +4,7 @@
   <div class="search box">SEARCH</div>
   <aside class="box">
     <div>ASIDE</div>
-    <ul>
-      <li *ngFor="let todo of todos">
-        <a href="{{todo.id}}">{{todo.title}}</a>
-      </li>
-    </ul>
+    <app-nav-bar [todos]="todos"/>
   </aside>
   <section class="body-content box">
     <div>BODY CONTENT</div>
