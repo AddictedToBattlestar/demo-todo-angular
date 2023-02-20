@@ -17,7 +17,7 @@ export class AppComponent {
 
   constructor(private todoService: TodoService) {
     this.todoService.getAll().pipe(takeUntil(this.destroy$)).subscribe(data => {
-      console.log('todo data:', data);
+      console.debug('AppComponent, todoService.getAll result:', data);
       this.todos = data;
     });
   }

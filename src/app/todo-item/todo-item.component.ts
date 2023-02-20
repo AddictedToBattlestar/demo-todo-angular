@@ -20,7 +20,7 @@ export class TodoItemComponent implements OnInit {
     this.selectedId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.selectedId != null) {
       this.todoService.getById(this.selectedId).pipe(takeUntil(this.destroy$)).subscribe(data => {
-        console.log('todo data:', data);
+        console.debug('TodoItemComponent, todoService.getById result:', data);
         this.todo = data;
       });
       this.todoService.setSelectedId(this.selectedId);

@@ -18,7 +18,6 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('NavBarComponent.ngOnInit');
     this.todoService.selectedIdMessages$.subscribe(newSelectedId => {
       console.debug('NavBarComponent.ngOnInit, todoService.selectedId.subscribe - newSelectedId', newSelectedId);
       this.selectedId = newSelectedId;
