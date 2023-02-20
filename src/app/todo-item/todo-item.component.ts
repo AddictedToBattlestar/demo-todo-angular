@@ -9,7 +9,7 @@ import {TodoModel} from "../todo.model";
   styleUrls: ['./todo-item.component.scss']
 })
 export class TodoItemComponent implements OnInit {
-  id: null | string = null;
+  selectedId: null | number = null;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
   todo: null | TodoModel = null;
@@ -17,12 +17,13 @@ export class TodoItemComponent implements OnInit {
   constructor(private route: ActivatedRoute, private todoService: TodoService) {
   }
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-    if (this.id != null) {
-      this.todoService.getById(this.id).pipe(takeUntil(this.destroy$)).subscribe(data => {
+    this.selectedId = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.selectedId != null) {
+      this.todoService.getById(this.selectedId).pipe(takeUntil(this.destroy$)).subscribe(data => {
         console.log('todo data:', data);
         this.todo = data;
       });
+      this.todoService.setSelectedId(this.selectedId);
     }
   }
 }

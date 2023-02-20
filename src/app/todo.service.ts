@@ -1,19 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {TodoModel} from "./todo.model";
+import {defer, ReplaySubject} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
   constructor(private http: HttpClient) { }
 
+  private selectedId = new ReplaySubject<null | number>(1);
+  public readonly selectedIdMessages$ = defer(() => this.selectedId.asObservable());
+
+  setSelectedId(id: null | number) {
+    console.debug('TodoService.setSelectedId', id);
+    this.selectedId.next(id);
+  }
+
   getAll() {
-    console.log('making call to get todos');
+    console.debug('TodoService.getAll, making call to get todos');
     return this.http.get<TodoModel[]>("/api/todos");
   }
 
-  getById(id: String) {
-    console.log(`making call to get todo ${id}`);
+  getById(id: number) {
+    console.debug(`TodoService.getById, making call to get todo ${id}`);
     return this.http.get<TodoModel>(`/api/todos/${id}`);
   }
 }

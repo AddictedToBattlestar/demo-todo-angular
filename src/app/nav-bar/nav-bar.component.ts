@@ -1,12 +1,27 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {TodoModel} from "../todo.model";
+import {ActivatedRoute} from "@angular/router";
+import {TodoService} from "../todo.service";
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.scss']
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit {
   @Input()
   todos: TodoModel[] = [];
+
+  selectedId: null | number = null;
+
+  constructor(private todoService: TodoService) {
+  }
+
+  ngOnInit() {
+    console.log('NavBarComponent.ngOnInit');
+    this.todoService.selectedIdMessages$.subscribe(newSelectedId => {
+      console.debug('NavBarComponent.ngOnInit, todoService.selectedId.subscribe - newSelectedId', newSelectedId);
+      this.selectedId = newSelectedId;
+    });
+  }
 }
