@@ -17,13 +17,19 @@ export class TodoItemComponent implements OnInit {
   constructor(private route: ActivatedRoute, private todoService: TodoService) {
   }
   ngOnInit(): void {
-    this.selectedId = Number(this.route.snapshot.paramMap.get('id'));
-    if (this.selectedId != null) {
-      this.todoService.getById(this.selectedId).pipe(takeUntil(this.destroy$)).subscribe(data => {
-        console.debug('TodoItemComponent, todoService.getById result:', data);
-        this.todo = data;
-      });
-      this.todoService.setSelectedId(this.selectedId);
-    }
+    this.route.paramMap.subscribe(params => {
+      this.selectedId = Number(params.get('id'));
+      console.debug('TodoItemComponent, route.paramMap change:', this.selectedId);
+      if (this.selectedId != null) {
+        this.todoService.getById(this.selectedId).pipe(takeUntil(this.destroy$)).subscribe(data => {
+          console.debug('TodoItemComponent, todoService.getById result:', data);
+          this.todo = data;
+        });
+        this.todoService.setSelectedId(this.selectedId);
+      } else {
+        this.todo = null;
+        this.todoService.setSelectedId(null);
+      }
+    });
   }
 }

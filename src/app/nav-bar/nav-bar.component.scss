@@ -9,14 +9,13 @@ ul {
   padding-inline-start: 0;
 
   color: yellow;
-  li {
+
+  a {
     &.selected-todo {
       background-color: #16db65;
     }
     border-radius: 0.35em;
     padding: 0.5em;
-  }
-  a {
     text-decoration: none;
     display: block;
     color: $font-color;

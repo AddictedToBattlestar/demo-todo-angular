@@ -18,11 +18,11 @@ export class TodoService {
 
   getAll() {
     console.debug('TodoService.getAll, making call to get todos');
-    return this.http.get<TodoModel[]>("/api/todos");
+    return this.http.get<TodoModel[]>("/api/todo");
   }
 
   getById(id: number) {
     console.debug(`TodoService.getById, making call to get todo ${id}`);
-    return this.http.get<TodoModel>(`/api/todos/${id}`);
+    return this.http.get<TodoModel>(`/api/todo/${id}`);
   }
 }
