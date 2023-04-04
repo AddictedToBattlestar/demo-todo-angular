@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-item-editor',
@@ -7,9 +7,12 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./todo-item-editor.component.scss']
 })
 export class TodoItemEditorComponent {
-  todoForm = new FormGroup({
-    title: new FormControl(''),
-    description: new FormControl('')
+  constructor(private formBuilder: FormBuilder) {
+  }
+
+  todoForm = this.formBuilder.group({
+    title: ['', [Validators.required, Validators.minLength(5)]],
+    description: ['', [Validators.required, Validators.minLength(10)]],
   });
 
   onSubmit() {
