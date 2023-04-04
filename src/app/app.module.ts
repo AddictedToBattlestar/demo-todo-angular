@@ -11,6 +11,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { AddNewTodoComponent } from './add-new-todo/add-new-todo.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TodoItemEditorComponent } from './todo-item-editor/todo-item-editor.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TodoItemEditorComponent } from './todo-item-editor/todo-item-editor.com
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
