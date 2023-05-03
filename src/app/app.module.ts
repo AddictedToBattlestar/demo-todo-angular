@@ -8,6 +8,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import {HttpClientModule} from "@angular/common/http";
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { AddNewTodoComponent } from './add-new-todo/add-new-todo.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TodoItemEditorComponent } from './todo-item-editor/todo-item-editor.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +18,15 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     TodoListingComponent,
     PageNotFoundComponent,
     TodoItemComponent,
-    NavBarComponent
+    NavBarComponent,
+    AddNewTodoComponent,
+    TodoItemEditorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

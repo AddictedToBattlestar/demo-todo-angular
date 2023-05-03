@@ -1,14 +1,16 @@
 <div class="layout-container">
-  <header class="box">HEADER</header>
-  <div class="new-todo box">NEW</div>
+  <header class="box">TODO Demo Application</header>
+  <div class="new-todo box" routerLinkActive="add-new-todo-active">
+    <a routerLink="new" ariaCurrentWhenActive="page">
+      <fa-icon [icon]="faPlus" size="lg"/>
+    </a>
+  </div>
   <div class="search box">SEARCH</div>
   <aside class="box">
-    <div>ASIDE</div>
     <app-nav-bar [todos]="todos"/>
   </aside>
   <section class="body-content box">
-    <div>BODY CONTENT</div>
-    <router-outlet></router-outlet>
+    <router-outlet/>
   </section>
 </div>
 

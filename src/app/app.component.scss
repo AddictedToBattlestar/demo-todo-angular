@@ -1,6 +1,11 @@
 @import 'src/styles/layout';
 @import 'src/styles/colors';
 
+//This whole file is scoped in angular and so I had to drop it in the styles.scss file
+body {
+  background-color: $background-color;
+}
+
 .box {
   background-color: $secondary-section-color;
   color: $font-color;
@@ -9,5 +14,17 @@
   font-size: 150%;
   &.body-content {
     background-color: $primary-section-color;
+  }
+}
+
+.new-todo {
+  padding: 0.4em;
+  &.add-new-todo-active {
+    background-color: $primary-color;
+  }
+  a {
+    text-decoration: none;
+    display: block;
+    color: $font-color;
   }
 }

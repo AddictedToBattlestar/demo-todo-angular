@@ -8,11 +8,9 @@ ul {
   margin-inline-end: 0;
   padding-inline-start: 0;
 
-  color: yellow;
-
   a {
     &.selected-todo {
-      background-color: #16db65;
+      background-color: $primary-color;
     }
     border-radius: 0.35em;
     padding: 0.5em;
