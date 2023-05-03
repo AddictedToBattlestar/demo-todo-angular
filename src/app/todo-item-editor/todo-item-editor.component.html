@@ -1,5 +1,6 @@
 <p>todo-item-editor works!</p>
-<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+
+<form *ngIf="todoForm; else noTodo" [formGroup]="todoForm" (ngSubmit)="onSubmit()">
   <div>
     <label for="todo-title">Title</label>
     <input
@@ -18,3 +19,7 @@
   </div>
   <button type="submit" [disabled]="!todoForm.valid">Submit</button>
 </form>
+
+<ng-template #noTodo>
+  <p>Please select a Todo edit</p>
+</ng-template>

@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Input } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {TodoModel} from "../todo.model";
+import {ActivatedRoute} from "@angular/router";
+import {TodoService} from "../todo.service";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-todo-item-editor',
@@ -7,16 +12,46 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./todo-item-editor.component.scss']
 })
 export class TodoItemEditorComponent {
-  constructor(private formBuilder: FormBuilder) {
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
+  constructor(private route: ActivatedRoute, private todoService: TodoService,private formBuilder: FormBuilder) {
   }
 
-  todoForm = this.formBuilder.group({
-    title: ['', [Validators.required, Validators.minLength(5)]],
-    description: ['', [Validators.required, Validators.minLength(10)]],
-  });
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const selectedId = Number(params.get('id'));
+      console.debug('TodoItemEditorComponent, route.paramMap change:', selectedId);
+      if (selectedId != null) {
+        this.todoService.getById(selectedId).pipe(takeUntil(this.destroy$)).subscribe(data => {
+          console.debug('TodoItemEditorComponent, todoService.getById result:', data);
+          this.buildForm(data);
+        });
+        this.todoService.setSelectedId(selectedId);
+      } else {
+        this.buildForm(null);
+        this.todoService.setSelectedId(null);
+      }
+    });
+  }
+
+  buildForm(todoBeingEdited: TodoModel | null) {
+    if (todoBeingEdited) {
+      this.todoForm = this.formBuilder.group({
+        title: [todoBeingEdited.title, Validators.required],
+        description: [todoBeingEdited.description, Validators.required],
+        dueDate: [todoBeingEdited.dueDate],
+        completed: [todoBeingEdited.complete, Validators.required]
+      });
+    } else {
+      this.todoForm = null;
+    }
+
+  }
+
+  todoForm: FormGroup | null = null
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
-    console.warn(this.todoForm.value);
+    console.warn("TodoItemEditorComponent, onSubmit", this.todoForm?.value);
   }
 }
