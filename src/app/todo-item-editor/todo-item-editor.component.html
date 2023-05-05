@@ -8,6 +8,11 @@
       id="todo-title"
       formControlName="title"
     >
+    <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
+      <div *ngIf="title.errors?.['required']">
+        Title is required.
+      </div>
+    </div>
   </div>
   <div>
     <label for="todo-description">Description</label>
@@ -16,6 +21,14 @@
       id="todo-description"
       formControlName="description"
     >
+    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
+      <div *ngIf="description.errors?.['required']">
+        Description is required.
+      </div>
+      <div *ngIf="description.errors?.['minlength']">
+        Description must be at least 10 characters long.
+      </div>
+    </div>
   </div>
   <button type="submit" [disabled]="!todoForm.valid">Submit</button>
 </form>

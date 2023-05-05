@@ -37,19 +37,20 @@ export class TodoItemEditorComponent {
   buildForm(todoBeingEdited: TodoModel | null) {
     if (todoBeingEdited) {
       this.todoForm = this.formBuilder.group({
-        title: [todoBeingEdited.title, Validators.required],
-        description: [todoBeingEdited.description, Validators.required],
+        title: [todoBeingEdited.title, [Validators.required]],
+        description: [todoBeingEdited.description, [Validators.required, Validators.minLength(10)]],
         dueDate: [todoBeingEdited.dueDate],
         completed: [todoBeingEdited.complete, Validators.required]
       });
     } else {
       this.todoForm = null;
     }
-
   }
 
   todoForm: FormGroup | null = null
 
+  get title() { return this.todoForm?.get('title')!; }
+  get description() { return this.todoForm?.get('description')!; }
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.warn("TodoItemEditorComponent, onSubmit", this.todoForm?.value);
