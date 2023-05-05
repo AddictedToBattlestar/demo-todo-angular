@@ -8,11 +8,6 @@
       id="todo-title"
       formControlName="title"
     >
-    <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
-      <div *ngIf="title.errors?.['required']">
-        Title is required.
-      </div>
-    </div>
   </div>
   <div>
     <label for="todo-description">Description</label>
@@ -21,6 +16,16 @@
       id="todo-description"
       formControlName="description"
     >
+  </div>
+  <button type="submit" [disabled]="!todoForm.valid">Submit</button>
+
+  <div>
+    <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
+      <div *ngIf="title.errors?.['required']">
+        Title is required.
+      </div>
+    </div>
+
     <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
       <div *ngIf="description.errors?.['required']">
         Description is required.
@@ -30,7 +35,7 @@
       </div>
     </div>
   </div>
-  <button type="submit" [disabled]="!todoForm.valid">Submit</button>
+
 </form>
 
 <ng-template #noTodo>
