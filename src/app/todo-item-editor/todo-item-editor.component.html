@@ -17,7 +17,24 @@
       formControlName="description"
     >
   </div>
+  <div>
+    <label for="todo-viewer-is-complete">Is Complete?</label>
+    <input
+      id="todo-viewer-is-complete"
+      type="checkbox"
+      formControlName="complete"
+    />
+  </div>
+  <div>
+    <label for="todo-viewer-due-date">Due Date</label>
+    <input
+      id="todo-viewer-due-date"
+      type="datetime-local"
+      formControlName="dueDate"
+    />
+  </div>
   <button type="submit" [disabled]="!todoForm.valid">Submit</button>
+  <button [routerLink]="['/', todoForm.value.id]">Cancel</button>
 
   <div>
     <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">

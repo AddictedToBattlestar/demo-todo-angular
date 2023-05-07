@@ -25,4 +25,13 @@ export class TodoService {
     console.debug(`TodoService.getById, making call to get todo ${id}`);
     return this.http.get<TodoModel>(`/api/todo/${id}`);
   }
+
+  save(todo: TodoModel) {
+    console.debug(`TodoService.save, making call to save todo`, todo);
+    if (todo.id) {
+      return this.http.put<TodoModel>(`/api/todo/${todo.id}`, todo);
+    } else {
+      return this.http.post<TodoModel>(`/api/todo`, todo);
+    }
+  }
 }

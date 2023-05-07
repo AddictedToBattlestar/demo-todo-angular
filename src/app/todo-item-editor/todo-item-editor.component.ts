@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TodoModel} from "../todo.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TodoService} from "../todo.service";
 import {Subject, takeUntil} from "rxjs";
 
@@ -14,7 +14,10 @@ import {Subject, takeUntil} from "rxjs";
 export class TodoItemEditorComponent {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  constructor(private route: ActivatedRoute, private todoService: TodoService,private formBuilder: FormBuilder) {
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private todoService: TodoService,
+              private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -37,10 +40,11 @@ export class TodoItemEditorComponent {
   buildForm(todoBeingEdited: TodoModel | null) {
     if (todoBeingEdited) {
       this.todoForm = this.formBuilder.group({
+        id: [todoBeingEdited.id],
         title: [todoBeingEdited.title, [Validators.required]],
         description: [todoBeingEdited.description, [Validators.required, Validators.minLength(10)]],
         dueDate: [todoBeingEdited.dueDate],
-        completed: [todoBeingEdited.complete, Validators.required]
+        complete: [todoBeingEdited.complete, Validators.required]
       });
     } else {
       this.todoForm = null;
@@ -53,6 +57,13 @@ export class TodoItemEditorComponent {
   get description() { return this.todoForm?.get('description')!; }
   onSubmit() {
     // TODO: Use EventEmitter with form value
-    console.warn("TodoItemEditorComponent, onSubmit", this.todoForm?.value);
+    console.debug("TodoItemEditorComponent, onSubmit", this.todoForm?.value);
+    if (this.todoForm?.valid) {
+      const todoBeingEdited = this.todoForm?.value;
+      this.todoService.save(todoBeingEdited).pipe(takeUntil(this.destroy$)).subscribe(data => {
+        console.debug('TodoItemEditorComponent, todoService.save (success) result:', data);
+        this.router.navigate([`/${data.id}`]);
+      });
+    }
   }
 }
