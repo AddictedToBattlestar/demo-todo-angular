@@ -47,7 +47,13 @@ export class TodoItemEditorComponent {
         complete: [todoBeingEdited.complete, Validators.required]
       });
     } else {
-      this.todoForm = null;
+      this.todoForm = this.formBuilder.group({
+        id: [null],
+        title: ['', [Validators.required]],
+        description: ['', [Validators.required, Validators.minLength(10)]],
+        dueDate: [null],
+        complete: [false, Validators.required]
+      });
     }
   }
 
