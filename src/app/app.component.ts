@@ -19,6 +19,14 @@ export class AppComponent {
   todos: TodoModel[] = [];
 
   constructor(private todoService: TodoService) {
+    this.getTodos();
+    this.todoService.refreshRequiredMessages$.subscribe(() => {
+      console.debug('AppComponent, todoService.refreshRequiredMessages$ received');
+      this.getTodos();
+    });
+  }
+
+  getTodos() {
     this.todoService.getAll().pipe(takeUntil(this.destroy$)).subscribe(data => {
       console.debug('AppComponent, todoService.getAll result:', data);
       this.todos = data;

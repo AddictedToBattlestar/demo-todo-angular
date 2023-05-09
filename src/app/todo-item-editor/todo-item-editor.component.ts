@@ -67,7 +67,6 @@ export class TodoItemEditorComponent {
       const todoBeingEdited = this.todoForm?.value;
       this.todoService.save(todoBeingEdited).pipe(takeUntil(this.destroy$)).subscribe(data => {
         console.debug('TodoItemEditorComponent, todoService.save (success) result:', data);
-        this.todoService.getAll(); //TODO: This does not refresh the list for existing subscribers.
         this.router.navigate([`/${data.id}`]);
       });
     }
