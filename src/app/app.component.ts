@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Subject, takeUntil} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {TodoModel} from "./todo.model";
 import {TodoService} from "./todo.service";
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -14,22 +14,13 @@ export class AppComponent {
 
   title = 'demo-todo-angular';
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
-
-  todos: TodoModel[] = [];
+  todos$: Observable<TodoModel[]>;
 
   constructor(private todoService: TodoService) {
-    this.getTodos();
+    this.todos$ = this.todoService.getAll();
     this.todoService.refreshRequiredMessages$.subscribe(() => {
       console.debug('AppComponent, todoService.refreshRequiredMessages$ received');
-      this.getTodos();
-    });
-  }
-
-  getTodos() {
-    this.todoService.getAll().pipe(takeUntil(this.destroy$)).subscribe(data => {
-      console.debug('AppComponent, todoService.getAll result:', data);
-      this.todos = data;
+      this.todos$ = this.todoService.getAll();
     });
   }
 }

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TodoModel} from "../todo.model";
 import {TodoService} from "../todo.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,7 +10,7 @@ import {TodoService} from "../todo.service";
 })
 export class NavBarComponent implements OnInit {
   @Input()
-  todos: TodoModel[] = [];
+  todos$: Observable<TodoModel[]> | null = null
 
   selectedId: null | number = null;
 
