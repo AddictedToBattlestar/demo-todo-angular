@@ -62,7 +62,6 @@ export class TodoItemEditorComponent {
   get title() { return this.todoForm?.get('title')!; }
   get description() { return this.todoForm?.get('description')!; }
   onSubmit() {
-    // TODO: Use EventEmitter with form value
     console.debug("TodoItemEditorComponent, onSubmit", this.todoForm?.value);
     if (this.todoForm?.valid) {
       const todoBeingEdited = this.todoForm?.value;
