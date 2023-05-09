@@ -1,5 +1,5 @@
 <div>TODO Viewer</div>
-<div *ngIf="todo">
+<div *ngIf="todo$ | async as todo">
   <div>
     <label for="todo-viewer-title">Title</label>
     <input

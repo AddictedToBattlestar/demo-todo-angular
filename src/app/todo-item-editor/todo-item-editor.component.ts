@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Input } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TodoModel} from "../todo.model";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -11,7 +10,7 @@ import {Subject, takeUntil} from "rxjs";
   templateUrl: './todo-item-editor.component.html',
   styleUrls: ['./todo-item-editor.component.scss']
 })
-export class TodoItemEditorComponent {
+export class TodoItemEditorComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private route: ActivatedRoute,
