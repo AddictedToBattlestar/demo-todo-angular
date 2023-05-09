@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {Observable, Subject, takeUntil} from "rxjs";
+import {Component} from '@angular/core';
+import {Observable} from "rxjs";
 import {TodoModel} from "./todo.model";
 import {TodoService} from "./todo.service";
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
